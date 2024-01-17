@@ -1,5 +1,6 @@
 // src/pages/CreateEmployee.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import Dropdown from '../components/Dropdown';
 import ConfirmationModal from '../components/ConfirmationModal';
@@ -48,8 +49,7 @@ const CreateEmployee = () => {
   return (
     <div className="container">
       <div className="link-container">
-        {/* Make sure to replace this <a> tag with a <Link> component if you are using react-router */}
-        <a href="/employee-list">View Current Employees</a>
+      <Link to="/employee-list">View current employees</Link>
       </div>
       <h2>Create Employee</h2>
       <form onSubmit={handleSubmit}>
