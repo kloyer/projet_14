@@ -95,7 +95,6 @@ const CreateEmployee = () => {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     employees.push(employee);
     localStorage.setItem('employees', JSON.stringify(employees));
-    // Ici, vous pouvez déclencher l'affichage de la modale de confirmation
     openConfirmationModal();
   };
 
@@ -110,7 +109,7 @@ const CreateEmployee = () => {
   };
 
   const ConfirmationModal = ({ isOpen, onClose }) => {
-    if (!isOpen) return null; // Don't render the modal at all if it is not open
+    if (!isOpen) return null;
   
     return (
       <div className="modal-backdrop">
@@ -126,7 +125,7 @@ const CreateEmployee = () => {
   return (
     <div className="container">
       <div className="link-container">
-        <a href="/employee-list">View Current Employees</a> {/* Make sure this links correctly with React Router */}
+        <a href="/employee-list">View Current Employees</a>
       </div>
       <h2>Create Employee</h2>
       <form onSubmit={handleSubmit}>

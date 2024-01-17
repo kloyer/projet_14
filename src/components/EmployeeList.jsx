@@ -1,6 +1,6 @@
 // src/components/EmployeeList.jsx
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing
+import { Link } from 'react-router-dom';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -9,7 +9,7 @@ const EmployeeList = () => {
     setEmployees(JSON.parse(localStorage.getItem('employees')) || []);
   }, []);
 
-  // Function to format date strings for display
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -48,7 +48,7 @@ const EmployeeList = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/">Home</Link> {/* Use Link instead of <a> for internal routing */}
+      <Link to="/">Home</Link>
     </div>
   );
 };
