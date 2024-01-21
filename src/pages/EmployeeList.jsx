@@ -1,12 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTable, useSortBy, usePagination } from 'react-table';
+import { useSelector } from 'react-redux';
 
 const EmployeeList = () => {
-  const employees = useMemo(
-    () => JSON.parse(localStorage.getItem('employees')) || [],
-    []
-  );
+  const employees = useSelector((state) => state.employees);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };

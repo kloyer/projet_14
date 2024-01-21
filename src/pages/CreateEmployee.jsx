@@ -5,9 +5,12 @@ import DatePicker from 'react-datepicker';
 import Dropdown from '../components/Dropdown';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { states, departments } from '../data/data';
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../reducers/employeeReducer';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const CreateEmployee = () => {
+  const dispatch = useDispatch();
   const [employee, setEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -30,9 +33,8 @@ const CreateEmployee = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    // Dispatch the action to add an employee to the store
+    dispatch(addEmployee(employee));
     openConfirmationModal();
   };
 
