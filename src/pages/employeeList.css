@@ -1,0 +1,32 @@
+/* EmployeeList.css */
+
+/* Style général pour le tableau */
+.react-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style pour l'en-tête de colonne */
+  .react-table th {
+    background-color: #f2f2f2; /* Couleur de fond pour l'en-tête */
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Style pour les lignes impaires */
+  .react-table tbody tr:nth-child(odd) {
+    background-color: #f7f7f7; /* Couleur de fond pour les lignes impaires */
+  }
+  
+  /* Style pour les lignes paires */
+  .react-table tbody tr:nth-child(even) {
+    background-color: #fff; /* Couleur de fond pour les lignes paires */
+  }
+  
+  /* Style pour l'effet hover */
+  .react-table tbody tr:hover {
+    background-color: #d4d4d4; /* Couleur de fond au survol */
+    cursor: pointer; /* Curseur main au survol */
+  }
+  

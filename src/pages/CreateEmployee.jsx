@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const CreateEmployee = () => {
   const dispatch = useDispatch();
+  
   const [employee, setEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -18,9 +19,9 @@ const CreateEmployee = () => {
     startDate: new Date(),
     street: '',
     city: '',
-    state: '',
+    state: states[0].name,
     zipCode: '',
-    department: '',
+    department: departments[0],
   });
 
   const handleInputChange = (e) => {

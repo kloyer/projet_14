@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { useTable, useSortBy, usePagination } from 'react-table';
 import { useSelector } from 'react-redux';
+import './employeeList.css';
 
 const EmployeeList = () => {
   const employees = useSelector((state) => state.employees);
+  const [pageSize, setPageSize] = useState(10);
+  const pageSizeOptions = [10, 25, 50];
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -56,13 +59,11 @@ const EmployeeList = () => {
   );
 
   const {
-    // ...
     getTableProps,
     getTableBodyProps,
     headerGroups,
     page,
     prepareRow,
-    // ...
     previousPage,
     nextPage,
     canPreviousPage,
@@ -73,6 +74,7 @@ const EmployeeList = () => {
     {
       columns,
       data: employees,
+      initialState: { pageSize },
     },
     useSortBy,
     usePagination
@@ -81,6 +83,19 @@ const EmployeeList = () => {
   return (
     <div id="employee-div" className="container">
       <h1>Current Employees</h1>
+      <div className="page-size-selector">
+        <span>Rows per page:</span>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {pageSizeOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
       <table {...getTableProps()} className="react-table">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -119,8 +134,6 @@ const EmployeeList = () => {
           <button
             key={pageNumber}
             onClick={() => {
-              // Navigate to the selected page
-              // Replace gotoPage(pageNumber) with pageOptions[pageNumber]
               pageOptions[pageNumber]();
             }}
             disabled={pageNumber === pageIndex}
