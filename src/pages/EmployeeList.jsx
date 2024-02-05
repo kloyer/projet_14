@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState  } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTable, useSortBy, usePagination } from 'react-table';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ const EmployeeList = () => {
   const employees = useSelector((state) => state.employees);
   const [pageSize, setPageSize] = useState(10);
   const pageSizeOptions = [10, 25, 50];
+  const [searchQuery, setSearchQuery] = useState('');
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -58,6 +59,18 @@ const EmployeeList = () => {
     []
   );
 
+  const filteredEmployees = useMemo(() => {
+    if (!searchQuery) {
+      return employees;
+    }
+    const query = searchQuery.toLowerCase();
+    return employees.filter((employee) => {
+      return Object.values(employee).some((value) =>
+        String(value).toLowerCase().includes(query)
+      );
+    });
+  }, [searchQuery, employees]);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -73,7 +86,7 @@ const EmployeeList = () => {
   } = useTable(
     {
       columns,
-      data: employees,
+      data: filteredEmployees,
       initialState: { pageSize },
     },
     useSortBy,
@@ -83,6 +96,14 @@ const EmployeeList = () => {
   return (
     <div id="employee-div" className="container">
       <h1>Current Employees</h1>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search employees..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       <div className="page-size-selector">
         <span>Rows per page:</span>
         <select
